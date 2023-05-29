@@ -1,3 +1,4 @@
+import express from 'express';
 import { Telegraf, session } from 'telegraf';
 import { message } from 'telegraf/filters';
 import { code } from 'telegraf/format';
@@ -6,6 +7,7 @@ import { openai } from './openai.js';
 import { removeFile } from './utils.js';
 import { initCommand, processTextToChat, INITIAL_SESSION } from './logic.js';
 
+const app = express();
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN);
 
 bot.use(session());
@@ -58,3 +60,5 @@ bot.launch();
 
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
+
+app.listen(3000, () => console.log(`My server is running on port ${3000}`));
