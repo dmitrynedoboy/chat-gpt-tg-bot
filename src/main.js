@@ -1,13 +1,12 @@
 import { Telegraf, session } from 'telegraf';
 import { message } from 'telegraf/filters';
 import { code } from 'telegraf/format';
-import config from 'config';
 import { ogg } from './ogg.js';
 import { openai } from './openai.js';
 import { removeFile } from './utils.js';
 import { initCommand, processTextToChat, INITIAL_SESSION } from './logic.js';
 
-const bot = new Telegraf(config.get('TELEGRAM_TOKEN'));
+const bot = new Telegraf(process.env.TELEGRAM_TOKEN);
 
 bot.use(session());
 
